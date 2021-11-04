@@ -48,12 +48,7 @@ public class Blogg {
 	}
 
 	public boolean ledigPlass() {
-		for (int i = 0; i < innleggs.length; i++) {
-			if (innleggs[i] == null) {
-				return true;
-			}
-		}
-		return false;
+		return nesteLedig < innleggs.length;
 	}
 	
 	public boolean leggTil(Innlegg innlegg) {
