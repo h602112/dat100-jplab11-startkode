@@ -71,13 +71,12 @@ public abstract class Innlegg {
 	
 	public boolean erLik(Innlegg innlegg) {
 		return innlegg.getId() == this.id;
-
 	}
 	
 	@Override
 	public String toString() {
 		
-		return this.id +  "\n" + this.bruker + "\n" + "23-10\n" + this.likes + "\n";
+		return this.id +  "\n" + this.bruker + "\n" + this.dato + "\n" + this.likes + "\n";
 				
 	}
 	

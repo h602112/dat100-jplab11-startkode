@@ -30,42 +30,51 @@ public class Blogg {
 	}
 	
 	public int finnInnlegg(Innlegg innlegg) {
-		int indeks = 0;
-		for (Innlegg inlegg: this.innleggs) {
-			if (inlegg.erLik(innlegg)) {
-				return indeks;
+		for (int i = 0; i < this.nesteLedig; i++) {
+			if (innlegg.erLik(innleggs[i])) {
+				return i;
 			}
-			indeks++;
 		}
 		return -1;
 	}
 
 	public boolean finnes(Innlegg innlegg) {
-		while (this.innleggs != null) {
-			for (Innlegg inlegg : this.innleggs) {
-				if (inlegg.erLik(innlegg)) {
-					return true;
-				}
+		for (int i = 0; i < this.nesteLedig; i++) {
+			if (innlegg.erLik(innleggs[i])) {
+				return true;
 			}
 		}
 		return false;
 	}
 
 	public boolean ledigPlass() {
-		return nesteLedig < innleggs.length;
+		for (int i = 0; i < innleggs.length; i++) {
+			if (innleggs[i] == null) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public boolean leggTil(Innlegg innlegg) {
-		while (!(finnes(innlegg)) && ledigPlass()) {
-			this.innleggs[nesteLedig] = innlegg;
-			nesteLedig++;
-			return true;
+		if (!(finnes(innlegg))) {
+			for (int i = 0; i < innleggs.length; i++) {
+				if (innleggs[i] == null) {
+					innleggs[i] = innlegg;
+					nesteLedig++;
+					return true;
+				}
+			}
 		}
 		return false;
 	}
 	
 	public String toString() {
-		throw new UnsupportedOperationException(TODO.method());
+		String returnString = "";
+		for (Innlegg innlegg: innleggs) {
+			returnString += innlegg.toString();
+		}
+		return getAntall() + "\n" + returnString;
 	}
 
 	// valgfrie oppgaver nedenfor
