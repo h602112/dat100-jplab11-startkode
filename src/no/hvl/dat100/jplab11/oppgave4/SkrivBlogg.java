@@ -6,20 +6,28 @@ import java.io.PrintWriter;
 import no.hvl.dat100.jplab11.common.TODO;
 import no.hvl.dat100.jplab11.oppgave3.*;
 
+import javax.swing.*;
+
 public class SkrivBlogg {
 
 	public static boolean skriv(Blogg samling, String mappe, String filnavn) {
-		boolean ok = false;
+		PrintWriter writer = null;
+
 		try {
-			PrintWriter skriver = new PrintWriter(mappe + filnavn);
-			skriver.write(samling.toString());
-			skriver.close();
-			ok = true;
-			return ok;
-		} catch (Exception e) {
-			System.out.printf("Exception: " + e.getMessage());
+			writer = new PrintWriter(mappe + filnavn);
+
+			writer.println(samling.toString());
+			return true;
+
+
+		} catch (FileNotFoundException e) {
+			JOptionPane.showMessageDialog(null, "Filen kan ikke Åpnes");
+		} finally {
+			if (writer != null) {
+				writer.close();
+			}
 		}
-		return ok;
+		return false;
 
 	}
 }

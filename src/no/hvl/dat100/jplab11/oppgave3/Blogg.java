@@ -67,7 +67,9 @@ public class Blogg {
 	public String toString() {
 		String returnString = "";
 		for (Innlegg innlegg: innleggs) {
-			returnString += innlegg.toString();
+			if (innlegg != null) {
+				returnString += innlegg.toString();
+			}
 		}
 		return getAntall() + "\n" + returnString;
 	}
